@@ -1,0 +1,1026 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azkars After Fard Salah - Authentic Supplications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .intro {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro h2 {
+            color: #1a2a6c;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .intro p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .azkar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .azkar-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .azkar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .azkar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #1a2a6c, #b21f1f);
+        }
+
+        .arabic {
+            font-size: 2rem;
+            text-align: right;
+            direction: rtl;
+            margin-bottom: 20px;
+            color: #1a2a6c;
+            font-family: 'Arial', 'Tahoma', sans-serif;
+            line-height: 2.5rem;
+            font-weight: 500;
+        }
+
+        .source {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(26, 42, 108, 0.1);
+            border-radius: 8px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .source:hover {
+            background: rgba(26, 42, 108, 0.2);
+        }
+
+        .source i {
+            color: #b21f1f;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .source-text {
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+
+        .reference {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .times {
+            background: #b21f1f;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .times.fajr-maghrib {
+            background: #ff8c00;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 15px;
+        }
+
+        .counter-btn {
+            background: #1a2a6c;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .counter-btn:hover {
+            background: #b21f1f;
+            transform: scale(1.1);
+        }
+
+        .counter-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            min-width: 50px;
+            text-align: center;
+            color: #1a2a6c;
+        }
+
+        .count.completed {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .reset-btn {
+            background: #b21f1f;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #1a2a6c;
+        }
+
+        .translation-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .translation-btn:hover {
+            background: #1a2a6c;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            margin-top: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hadith-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hadith-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #b21f1f;
+        }
+
+        .hadith-arabic {
+            font-size: 1.8rem;
+            text-align: right;
+            direction: rtl;
+            margin: 20px 0;
+            color: #1a2a6c;
+            font-family: 'Arial', 'Tahoma', sans-serif;
+            line-height: 2.3rem;
+        }
+
+        .hadith-translation {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: #444;
+            line-height: 1.7;
+        }
+
+        .hadith-reference {
+            font-size: 1rem;
+            color: #1a2a6c;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(26, 42, 108, 0.1);
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .azkar-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .arabic {
+                font-size: 1.7rem;
+            }
+            
+            .hadith-arabic {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .arabic {
+                font-size: 1.5rem;
+            }
+            
+            .hadith-content {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-pray"></i> Azkars After Fard Salah</h1>
+            <p class="subtitle">Authentic supplications from the Quran and Sunnah to be recited after obligatory prayers</p>
+        </header>
+
+        <div class="intro">
+            <h2>Authentic Azkars After Prayer</h2>
+            <p>These are authentic supplications and remembrances (Azkars) that the Prophet Muhammad (ﷺ) taught and practiced after completing the obligatory prayers. They are compiled from reliable Hadith sources and are recommended for every Muslim to recite after Fard Salah.</p>
+        </div>
+
+        <div class="azkar-grid">
+            <!-- 1. Loud Takbir -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time, loudly</div>
+                <div class="arabic">
+                    اللّٰهُ أَكْبَرُ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('takbir')">Translation</button>
+                <div class="source" onclick="showHadith('takbir')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="reference">Hadith #842, 1316</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 2. Istighfar -->
+            <div class="azkar-card" data-max="3">
+                <div class="times">Recite 3 times</div>
+                <div class="arabic">
+                    أَسْتَغْفِرُ اللَّهَ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('istighfar')">Translation</button>
+                <div class="source" onclick="showHadith('istighfar')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih Muslim</div>
+                        <div class="reference">Hadith #1334</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 2. Salutation -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('salutation')">Translation</button>
+                <div class="source" onclick="showHadith('salutation')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih Muslim</div>
+                        <div class="reference">Hadith #1334</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 3. Recitation of Ayat al-Kursi -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('ayat_al_kursi')">Translation</button>
+                <div class="source" onclick="showHadith('ayat_al_kursi')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: An-Nasa'i Al-Kubra</div>
+                        <div class="reference">Hadith #9928</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 4. A comprehensive dhikr taught to Mu'adh -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    رَبِّ أَعِنِّي عَلَىٰ ذِكْرِكَ، وَشُكْرِكَ، وَحُسْنِ عِبَادَتِكَ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('muadh_dhikr')">Translation</button>
+                <div class="source" onclick="showHadith('muadh_dhikr')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Abu Dawud & An-Nasa'i</div>
+                        <div class="reference">Hadith #1522, 1303</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 5. Beautiful du'a from the Qur'an -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً، وَفِي الْآخِرَةِ حَسَنَةً، وَقِنَا عَذَابَ النَّارِ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('quran_dua')">Translation</button>
+                <div class="source" onclick="showHadith('quran_dua')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="reference">Hadith #6389, 6840</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 6. Reciting la ilaha illallah 3 times -->
+            <div class="azkar-card" data-max="3">
+                <div class="times">Recite 3 times</div>
+                <div class="arabic">
+                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('la_ilaha_3')">Translation</button>
+                <div class="source" onclick="showHadith('la_ilaha_3')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari</div>
+                        <div class="reference">Hadith #6473</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 7. Tasbih with glorification and repentance -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ، وَأَتُوبُ إِلَيْكَ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('tasbih_repentance')">Translation</button>
+                <div class="source" onclick="showHadith('tasbih_repentance')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: An-Nasa'i & Tirmidhi</div>
+                        <div class="reference">Hadith #1344, 3433</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 8. Recitation of the last 3 Surahs (Mu'awwidhatayn) - Ikhlas -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾
+                </div>
+                <button class="translation-btn" onclick="showTranslation('ikhlas')">Translation</button>
+                <div class="source" onclick="showHadith('ikhlas')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Tirmidhi & Abu Dawud</div>
+                        <div class="reference">Hadith #2903, 1523</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 8. Recitation of the last 3 Surahs (Mu'awwidhatayn) - Falaq -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾
+                </div>
+                <button class="translation-btn" onclick="showTranslation('falaq')">Translation</button>
+                <div class="source" onclick="showHadith('falaq')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Tirmidhi & Abu Dawud</div>
+                        <div class="reference">Hadith #2903, 1523</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 8. Recitation of the last 3 Surahs (Mu'awwidhatayn) - Nas -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَٰهِ النَّاسِ ﴿٣﴾ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾
+                </div>
+                <button class="translation-btn" onclick="showTranslation('nas')">Translation</button>
+                <div class="source" onclick="showHadith('nas')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Tirmidhi & Abu Dawud</div>
+                        <div class="reference">Hadith #2903, 1523</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 9. Tasbihat of Fatimah - Subhanallah -->
+            <div class="azkar-card" data-max="33">
+                <div class="times">Recite 33 times</div>
+                <div class="arabic">
+                    سُبْحَانَ اللَّهِ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('subhanallah')">Translation</button>
+                <div class="source" onclick="showHadith('subhanallah')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="reference">Hadith #843, 1349</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 9. Tasbihat of Fatimah - Alhamdulillah -->
+            <div class="azkar-card" data-max="33">
+                <div class="times">Recite 33 times</div>
+                <div class="arabic">
+                    الْحَمْدُ لِلَّهِ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('alhamdulillah')">Translation</button>
+                <div class="source" onclick="showHadith('alhamdulillah')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="reference">Hadith #843, 1349</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 9. Tasbihat of Fatimah - Allahu Akbar -->
+            <div class="azkar-card" data-max="33">
+                <div class="times">Recite 33 times</div>
+                <div class="arabic">
+                    اللَّهُ أَكْبَرُ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('allahu_akbar')">Translation</button>
+                <div class="source" onclick="showHadith('allahu_akbar')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="reference">Hadith #843, 1349</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 9. Tasbihat of Fatimah - Final declaration -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('tasbihat_final')">Translation</button>
+                <div class="source" onclick="showHadith('tasbihat_final')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="reference">Hadith #843, 1349</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 10. Special reward after Fajr or Maghrib -->
+            <div class="azkar-card" data-max="10">
+                <div class="times fajr-maghrib">Recite 10 times after Maghrib or Fajr</div>
+                <div class="arabic">
+                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('special_fajr_maghrib')">Translation</button>
+                <div class="source" onclick="showHadith('special_fajr_maghrib')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Tirmidhi & Musnad Ahmad</div>
+                        <div class="reference">Hadith #3474, 18019</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 11. Safety from the Hellfire -->
+            <div class="azkar-card" data-max="7">
+                <div class="times">Recite 7 times after Fajr and Maghrib</div>
+                <div class="arabic">
+                    اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('safety_hellfire')">Translation</button>
+                <div class="source" onclick="showHadith('safety_hellfire')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Abu Dawud</div>
+                        <div class="reference">Hadith #5079</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 12. Dua for knowledge, provision, and righteous deeds after Fajr -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time after Fajr</div>
+                <div class="arabic">
+                    اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا
+                </div>
+                <button class="translation-btn" onclick="showTranslation('fajr_dua')">Translation</button>
+                <div class="source" onclick="showHadith('fajr_dua')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Ibn Majah</div>
+                        <div class="reference">Hadith #925</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 13. Dua about Divine provision and power -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('divine_provision')">Translation</button>
+                <div class="source" onclick="showHadith('divine_provision')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="reference">Hadith #844, 1342</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+
+            <!-- 14. Protection from cowardice, evil of old age, and torment -->
+            <div class="azkar-card" data-max="1">
+                <div class="times">Recite 1 time</div>
+                <div class="arabic">
+                    اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَىٰ أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ
+                </div>
+                <button class="translation-btn" onclick="showTranslation('protection_dua')">Translation</button>
+                <div class="source" onclick="showHadith('protection_dua')">
+                    <i class="fas fa-book"></i>
+                    <div>
+                        <div class="source-text">Source: Sahih al-Bukhari</div>
+                        <div class="reference">Hadith #2822</div>
+                    </div>
+                </div>
+                <div class="counter">
+                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="count">0</div>
+                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for the sake of Allah | Authentic Azkars after Fard Salah</p>
+            <p>All supplications are from verified Hadith sources | May Allah accept our prayers and deeds</p>
+            <p>(Faisal)</p>
+        </footer>
+    </div>
+
+    <!-- Hadith Popup -->
+    <div class="hadith-popup" id="hadithPopup">
+        <div class="hadith-content">
+            <span class="close-popup" onclick="closeHadith()">&times;</span>
+            <div id="hadithDetails"></div>
+        </div>
+    </div>
+
+    <!-- Translation Popup -->
+    <div class="hadith-popup" id="translationPopup">
+        <div class="hadith-content">
+            <span class="close-popup" onclick="closeTranslation()">&times;</span>
+            <div id="translationDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        const hadithData = {
+            takbir: {
+                arabic: "اللّٰهُ أَكْبَرُ",
+                translation: "Allah is the Greatest",
+                reference: "Syedna Abdullah bin Abbas narrates: I used to recognize the completion of the obligatory prayer of the Messenger of Allah by the loud sound of Takbir. (1 time, loudly) [Hadith #1316: Sahih al-Bukhari 842, Sahih Muslim]"
+            },
+            istighfar: {
+                arabic: "أَسْتَغْفِرُ اللَّهَ",
+                translation: "I seek forgiveness from Allah",
+                reference: "Syedna Thawban narrates: When the Messenger of Allah had finished his prayer, he would recite these words: (3 times) I ask Allah for forgiveness: immediately after that, 1 time [Hadith #1334: Sahih Muslim]"
+            },
+            salutation: {
+                arabic: "اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+                translation: "O Allah, You are As-Salam (the One Who is free from all defects and deficiencies) and from You is all peace, blessed are You, Possessor of majesty and honor",
+                reference: "Syedna Thawban narrates: When the Messenger of Allah had finished his prayer, he would recite these words: (3 times) I ask Allah for forgiveness: immediately after that, 1 time [Hadith #1334: Sahih Muslim]"
+            },
+            ayat_al_kursi: {
+                arabic: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+                translation: "Allah! There is none worthy of worship except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Supreme.",
+                reference: "Syedna Abu Umamah narrates: The Messenger of Allah said: Whoever recites Ayat al Kursi (Surah Al-Baqarah: Verse 255) after every prayer, he will for sure enter paradise immediately after his death. [Hadith #9928: An-Nasa'i Al-Kubra]"
+            },
+            muadh_dhikr: {
+                arabic: "رَبِّ أَعِنِّي عَلَىٰ ذِكْرِكَ، وَشُكْرِكَ، وَحُسْنِ عِبَادَتِكَ",
+                translation: "My Lord, help me to remember You, to thank You, and to worship You in the best manner",
+                reference: "Syedna Muadh bin Jabal narrates: the Messenger of Allah advised to me: O Muadh! Never leave saying these words after every prayer. (1 time) [Hadith #13033: An-Nasa'i, #1522: Abu Dawud]"
+            },
+            quran_dua: {
+                arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً، وَفِي الْآخِرَةِ حَسَنَةً، وَقِنَا عَذَابَ النَّارِ",
+                translation: "Our Lord, give us good in this world and good in the Hereafter, and save us from the punishment of the Fire",
+                reference: "Syedna Anas narrates: the Messenger of Allah would frequently pray. (1 time) [Hadith #6840: Sahih Muslim, #6389: Sahih al-Bukhari]"
+            },
+            la_ilaha_3: {
+                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+                translation: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty, and to Him belongs praise, and He is able to do all things",
+                reference: "Syedna Mugheerah bin Shuba narrates: When the Messenger of Allah would say Salam of the prayer, he would recite these words three times. [Hadith #6473: Sahih al-Bukhari]"
+            },
+            tasbih_repentance: {
+                arabic: "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ، وَأَتُوبُ إِلَيْكَ",
+                translation: "Glory is to You, O Allah, and praise, I bear witness that there is none worthy of worship except You, I seek Your forgiveness and I repent to You",
+                reference: "Syedna Aishah narrates: When the Messenger of Allah would participate in a gathering or perform the prayer, he would recite these words at the end: (1 time) [Hadith #3433: Tirmidhi, #1344: An-Nasa'i]"
+            },
+            ikhlas: {
+                arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾",
+                translation: "Say, 'He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, and there is none equal to Him.'",
+                reference: "Syedna Uqbah bin Amir narrates: the Messenger of Allah ordered me to recite Muawwidhat (i.e., the 3 Surahs giving the refuge of Allah against Shaitan, Jinn and magic etc.) at the end of every prayer. (The three Surahs 1 time) [Hadith #1523: Abu Dawud, #2903: Tirmidhi]"
+            },
+            falaq: {
+                arabic: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾",
+                translation: "Say, 'I seek refuge in the Lord of daybreak, from the evil of what He created, and from the evil of darkness when it settles, and from the evil of the blowers in knots, and from the evil of an envier when he envies.'",
+                reference: "Syedna Uqbah bin Amir narrates: the Messenger of Allah ordered me to recite Muawwidhat (i.e., the 3 Surahs giving the refuge of Allah against Shaitan, Jinn and magic etc.) at the end of every prayer. (The three Surahs 1 time) [Hadith #1523: Abu Dawud, #2903: Tirmidhi]"
+            },
+            nas: {
+                arabic: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَٰهِ النَّاسِ ﴿٣﴾ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾",
+                translation: "Say, 'I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the whisperer who withdraws, who whispers in the breasts of mankind, from among the jinn and mankind.'",
+                reference: "Syedna Uqbah bin Amir narrates: the Messenger of Allah ordered me to recite Muawwidhat (i.e., the 3 Surahs giving the refuge of Allah against Shaitan, Jinn and magic etc.) at the end of every prayer. (The three Surahs 1 time) [Hadith #1523: Abu Dawud, #2903: Tirmidhi]"
+            },
+            subhanallah: {
+                arabic: "سُبْحَانَ اللَّهِ",
+                translation: "Glory is to Allah",
+                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+            },
+            alhamdulillah: {
+                arabic: "الْحَمْدُ لِلَّهِ",
+                translation: "Praise be to Allah",
+                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+            },
+            allahu_akbar: {
+                arabic: "اللَّهُ أَكْبَرُ",
+                translation: "Allah is the Greatest",
+                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+            },
+            tasbihat_final: {
+                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+                translation: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty, and to Him belongs praise, and He is able to do all things",
+                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+            },
+            special_fajr_maghrib: {
+                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+                translation: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty, and to Him belongs praise. He gives life and causes death, and He is able to do all things",
+                reference: "Syedna Abdur Rahman bin Ghanam narrates: the Messenger of Allah said: Whoever says these words at the end of Maghrib prayer and Fajr prayer while his feet are still folded, before speaking, he gets the reward of freeing 10 slaves and he shall be in protection from every dangerous thing and Shaitan all the day and night (10 times) [Hadith #3474: Tirmidhi, #18019: Musnad Ahmad]"
+            },
+            safety_hellfire: {
+                arabic: "اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ",
+                translation: "O Allah, save me from the Fire",
+                reference: "Syedna Abu Harith narrates: the Messenger of Allah said: Whoever says these words at the end of Maghrib prayer before speaking and if he dies that night, he will be free from the fire of Hell. If he recites these words at the end of Fajr prayer and dies that day, he will be free form the Hell. (7 times) [Hadith #5079: Abu Dawud]"
+            },
+            fajr_dua: {
+                arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا",
+                translation: "O Allah, I ask You for beneficial knowledge and goodly provision and acceptable deeds",
+                reference: "Syedna Umm Salamah narrates: When the Messenger of Allah would say the Salam of the Fajr prayer, he would pray with these words (1 time) [Hadith #925: Ibn Majah]"
+            },
+            divine_provision: {
+                arabic: "اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
+                translation: "O Allah, none can withhold what You give, and none can give what You withhold, and the good fortune of any fortunate person is of no avail against You",
+                reference: "Syedna Mugheerah bin Shuba narrates: When the Messenger of Allah would say the Salam of the prayer, he would recite these words. (1 time) [Hadith #1342: Sahih al-Bukhari, #1844: Sahih Muslim]"
+            },
+            protection_dua: {
+                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَىٰ أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
+                translation: "O Allah, I seek refuge with You from cowardice, and I seek refuge with You from miserliness, and I seek refuge with You from being brought back to senile old age, and I seek refuge with You from the Fitnah (trials or afflictions) of the world, and I seek refuge with You from the punishments in the grave",
+                reference: "Syedna Saad bin Abi Waqqas narrates: the Messenger of Allah used to seek refuge with Allah through these words at the end of every prayer. (1 time) [Hadith #5718: Sahih al-Bukhari]"
+            }
+        };
+
+        function showHadith(key) {
+            const popup = document.getElementById('hadithPopup');
+            const details = document.getElementById('hadithDetails');
+            
+            if (hadithData[key]) {
+                details.innerHTML = `
+                    <h2 style="color: #1a2a6c; margin-bottom: 20px;">Authentic Hadith</h2>
+                    <div class="hadith-arabic">${hadithData[key].arabic}</div>
+                    <div class="hadith-translation">${hadithData[key].reference}</div>
+                `;
+                popup.style.display = 'flex';
+            }
+        }
+
+        function showTranslation(key) {
+            const popup = document.getElementById('translationPopup');
+            const details = document.getElementById('translationDetails');
+            
+            if (hadithData[key]) {
+                details.innerHTML = `
+                    <h2 style="color: #1a2a6c; margin-bottom: 20px;">Translation</h2>
+                    <div class="hadith-arabic">${hadithData[key].arabic}</div>
+                    <div class="hadith-translation">${hadithData[key].translation}</div>
+                `;
+                popup.style.display = 'flex';
+            }
+        }
+
+        function closeHadith() {
+            document.getElementById('hadithPopup').style.display = 'none';
+        }
+
+        function closeTranslation() {
+            document.getElementById('translationPopup').style.display = 'none';
+        }
+
+        function increaseCount(button) {
+            const card = button.closest('.azkar-card');
+            const countElement = card.querySelector('.count');
+            const maxCount = parseInt(card.getAttribute('data-max'));
+            let count = parseInt(countElement.textContent);
+            
+            if (count < maxCount) {
+                count++;
+                countElement.textContent = count;
+                
+                if (count === maxCount) {
+                    countElement.classList.add('completed');
+                    const buttons = card.querySelectorAll('.counter-btn');
+                    buttons[1].disabled = true;
+                }
+            }
+        }
+
+        function decreaseCount(button) {
+            const card = button.closest('.azkar-card');
+            const countElement = card.querySelector('.count');
+            let count = parseInt(countElement.textContent);
+            
+            if (count > 0) {
+                count--;
+                countElement.textContent = count;
+                countElement.classList.remove('completed');
+                
+                const buttons = card.querySelectorAll('.counter-btn');
+                buttons[1].disabled = false;
+            }
+        }
+
+        function resetCount(button) {
+            const card = button.closest('.azkar-card');
+            const countElement = card.querySelector('.count');
+            countElement.textContent = '0';
+            countElement.classList.remove('completed');
+            
+            const buttons = card.querySelectorAll('.counter-btn');
+            buttons[1].disabled = false;
+        }
+
+        // Close popup when clicking outside
+        window.onclick = function(event) {
+            const hadithPopup = document.getElementById('hadithPopup');
+            const translationPopup = document.getElementById('translationPopup');
+            
+            if (event.target === hadithPopup) {
+                hadithPopup.style.display = 'none';
+            }
+            
+            if (event.target === translationPopup) {
+                translationPopup.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+```
