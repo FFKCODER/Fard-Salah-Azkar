@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +69,19 @@
             font-size: 1.1rem;
         }
 
+        .lang-select-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .lang-select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            font-size: 1rem;
+        }
+
         .azkar-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -111,6 +123,13 @@
             font-family: 'Arial', 'Tahoma', sans-serif;
             line-height: 2.5rem;
             font-weight: 500;
+        }
+
+        .meaning {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #444;
+            line-height: 1.7;
         }
 
         .source {
@@ -159,11 +178,35 @@
             background: #ff8c00;
         }
 
-        .counter {
+        .counter-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            gap: 15px;
+        }
+
+        .translation-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 0; /* Adjusted */
+            transition: all 0.3s ease;
+            display: block;
+            width: fit-content;
+        }
+
+        .translation-btn:hover {
+            background: #1a2a6c;
+        }
+
+        .counter-buttons {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-top: 15px;
             gap: 15px;
         }
 
@@ -221,25 +264,6 @@
             background: #1a2a6c;
         }
 
-        .translation-btn {
-            background: #28a745;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .translation-btn:hover {
-            background: #1a2a6c;
-        }
-
         footer {
             text-align: center;
             color: white;
@@ -292,6 +316,17 @@
             line-height: 2.3rem;
         }
 
+        .hadith-transliteration {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #666;
+            margin: 20px 0;
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
         .hadith-translation {
             font-size: 1.2rem;
             margin: 20px 0;
@@ -340,6 +375,10 @@
                 font-size: 1.5rem;
             }
             
+            .meaning {
+                font-size: 1.1rem;
+            }
+            
             .hadith-content {
                 padding: 20px;
                 margin: 10px;
@@ -350,465 +389,488 @@
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-pray"></i> Azkars After Fard Salah</h1>
-            <p class="subtitle">Authentic supplications from the Quran and Sunnah to be recited after obligatory prayers</p>
+            <h1><i class="fas fa-pray"></i> <span id="headerTitle">Azkars After Fard Salah</span></h1>
+            <p class="subtitle" id="headerSubtitle">Authentic supplications from the Quran and Sunnah to be recited after obligatory prayers</p>
         </header>
 
         <div class="intro">
-            <h2>Authentic Azkars After Prayer</h2>
-            <p>These are authentic supplications and remembrances (Azkars) that the Prophet Muhammad (ﷺ) taught and practiced after completing the obligatory prayers. They are compiled from reliable Hadith sources and are recommended for every Muslim to recite after Fard Salah.</p>
+            <h2 id="introHeading">Authentic Azkars After Prayer</h2>
+            <p id="introText">These are authentic supplications and remembrances (Azkars) that the Prophet Muhammad (ﷺ) taught and practiced after completing the obligatory prayers. They are compiled from reliable Hadith sources and are recommended for every Muslim to recite after Fard Salah.</p>
+        </div>
+
+        <div class="lang-select-container">
+            <label for="languageSelect">Select Language:</label>
+            <select id="languageSelect" class="lang-select">
+                <option value="en">English</option>
+                <option value="hi">Hindi</option>
+            </select>
         </div>
 
         <div class="azkar-grid">
-            <!-- 1. Loud Takbir -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time, loudly</div>
+                <div class="times" data-lang-en="Recite 1 time, loudly" data-lang-hi="1 बार, जोर से पढ़ें">Recite 1 time, loudly</div>
                 <div class="arabic">
                     اللّٰهُ أَكْبَرُ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('takbir')">Translation</button>
+                <div class="meaning" data-lang-en="Allah is the Greatest" data-lang-hi="अल्लाह सबसे महान है">Allah is the Greatest</div>
                 <div class="source" onclick="showHadith('takbir')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari & Sahih Muslim" data-lang-hi="स्रोत: सहीह अल-बुखारी और सहीह मुस्लिम">Source: Sahih al-Bukhari & Sahih Muslim</div>
                         <div class="reference">Hadith #842, 1316</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('takbir')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 2. Istighfar -->
             <div class="azkar-card" data-max="3">
-                <div class="times">Recite 3 times</div>
+                <div class="times" data-lang-en="Recite 3 times" data-lang-hi="3 बार पढ़ें">Recite 3 times</div>
                 <div class="arabic">
                     أَسْتَغْفِرُ اللَّهَ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('istighfar')">Translation</button>
+                <div class="meaning" data-lang-en="I seek forgiveness from Allah" data-lang-hi="मैं अल्लाह से माफ़ी माँगता हूँ">I seek forgiveness from Allah</div>
                 <div class="source" onclick="showHadith('istighfar')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih Muslim" data-lang-hi="स्रोत: सहीह मुस्लिम">Source: Sahih Muslim</div>
                         <div class="reference">Hadith #1334</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('istighfar')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 2. Salutation -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
                     اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('salutation')">Translation</button>
+                <div class="meaning" data-lang-en="O Allah, You are As-Salam (the One Who is free from all defects and deficiencies) and from You is all peace, blessed are You, Possessor of majesty and honor" data-lang-hi="ऐ अल्लाह, तू अस्-सलाम है (वह जो सभी दोषों और कमियों से मुक्त है) और तुझसे ही सारी शांति है, तू बरकत वाला है, ऐ महिमा और सम्मान के मालिक">O Allah, You are As-Salam (the One Who is free from all defects and deficiencies) and from You is all peace, blessed are You, Possessor of majesty and honor</div>
                 <div class="source" onclick="showHadith('salutation')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih Muslim" data-lang-hi="स्रोत: सहीह मुस्लिम">Source: Sahih Muslim</div>
                         <div class="reference">Hadith #1334</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('salutation')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 3. Recitation of Ayat al-Kursi -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
-                    اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
+                    اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْـحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('ayat_al_kursi')">Translation</button>
+                <div class="meaning" data-lang-en="Allah! There is none worthy of worship except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Supreme." data-lang-hi="अल्लाह! उसके सिवा कोई इबादत के लायक नहीं, वह ज़िंदा है, सब कुछ संभालने वाला है। न उसे ऊंघ आती है और न नींद। जो कुछ आसमानों में है और जो कुछ ज़मीन में है, सब उसी का है। कौन है जो उसकी इजाज़त के बिना उसके पास सिफ़ारिश कर सके? वह जानता है जो उनके सामने है और जो उनके पीछे है, और वे उसके ज्ञान का कुछ भी नहीं जान सकते सिवाय उसके जो वह चाहे। उसकी कुर्सी आसमानों और ज़मीन पर फैली हुई है, और उनकी हिफाज़त उसे थकाती नहीं है। और वह सबसे ऊँचा, सबसे महान है।">Allah! There is none worthy of worship except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Supreme.</div>
                 <div class="source" onclick="showHadith('ayat_al_kursi')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: An-Nasa'i Al-Kubra</div>
+                        <div class="source-text" data-lang-en="Source: An-Nasa'i Al-Kubra" data-lang-hi="स्रोत: अन-नसाई अल-कुबरा">Source: An-Nasa'i Al-Kubra</div>
                         <div class="reference">Hadith #9928</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('ayat_al_kursi')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 4. A comprehensive dhikr taught to Mu'adh -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
                     رَبِّ أَعِنِّي عَلَىٰ ذِكْرِكَ، وَشُكْرِكَ، وَحُسْنِ عِبَادَتِكَ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('muadh_dhikr')">Translation</button>
+                <div class="meaning" data-lang-en="My Lord, help me to remember You, to thank You, and to worship You in the best manner" data-lang-hi="ऐ मेरे रब, मुझे तेरा ज़िक्र करने में, तेरा शुक्र अदा करने में, और तेरी अच्छी इबादत करने में मदद कर">My Lord, help me to remember You, to thank You, and to worship You in the best manner</div>
                 <div class="source" onclick="showHadith('muadh_dhikr')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Abu Dawud & An-Nasa'i</div>
+                        <div class="source-text" data-lang-en="Source: Abu Dawud & An-Nasa'i" data-lang-hi="स्रोत: अबू दाऊद और अन-नसाई">Source: Abu Dawud & An-Nasa'i</div>
                         <div class="reference">Hadith #1522, 1303</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('muadh_dhikr')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 5. Beautiful du'a from the Qur'an -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
                     رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً، وَفِي الْآخِرَةِ حَسَنَةً، وَقِنَا عَذَابَ النَّارِ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('quran_dua')">Translation</button>
+                <div class="meaning" data-lang-en="Our Lord, give us good in this world and good in the Hereafter, and save us from the punishment of the Fire" data-lang-hi="हमारे रब, हमें इस दुनिया में भलाई दे और आखिरत में भलाई दे, और हमें आग की सज़ा से बचा">Our Lord, give us good in this world and good in the Hereafter, and save us from the punishment of the Fire</div>
                 <div class="source" onclick="showHadith('quran_dua')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari & Sahih Muslim" data-lang-hi="स्रोत: सहीह अल-बुखारी और सहीह मुस्लिम">Source: Sahih al-Bukhari & Sahih Muslim</div>
                         <div class="reference">Hadith #6389, 6840</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('quran_dua')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 6. Reciting la ilaha illallah 3 times -->
             <div class="azkar-card" data-max="3">
-                <div class="times">Recite 3 times</div>
+                <div class="times" data-lang-en="Recite 3 times" data-lang-hi="3 बार पढ़ें">Recite 3 times</div>
                 <div class="arabic">
-                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْـحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('la_ilaha_3')">Translation</button>
+                <div class="meaning" data-lang-en="There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty and praise, and He is over everything omnipotent" data-lang-hi="अल्लाह के सिवा कोई इबादत के लायक नहीं, वह अकेला है, उसका कोई साझी नहीं। उसी का राज है, और उसी के लिए सारी प्रशंसा है, और वह हर चीज़ पर क़ादिर है।">There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty and praise, and He is over everything omnipotent</div>
                 <div class="source" onclick="showHadith('la_ilaha_3')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari" data-lang-hi="स्रोत: सहीह अल-बुखारी">Source: Sahih al-Bukhari</div>
                         <div class="reference">Hadith #6473</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('la_ilaha_3')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 7. Tasbih with glorification and repentance -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
-                    سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ، وَأَتُوبُ إِلَيْكَ
+                    सُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ، وَأَتُوبُ إِلَيْكَ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('tasbih_repentance')">Translation</button>
+                <div class="meaning" data-lang-en="Glory is to You, O Allah, and praise. I bear witness that there is none worthy of worship except You. I seek Your forgiveness and I repent to You" data-lang-hi="तू पाक है, ऐ अल्लाह, और तेरी ही प्रशंसा है। मैं गवाही देता हूँ कि तेरे सिवा कोई इबादत के लायक नहीं। मैं तुझसे माफ़ी माँगता हूँ और तेरी तरफ़ रुजू करता हूँ।">Glory is to You, O Allah, and praise. I bear witness that there is none worthy of worship except You. I seek Your forgiveness and I repent to You</div>
                 <div class="source" onclick="showHadith('tasbih_repentance')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: An-Nasa'i & Tirmidhi</div>
+                        <div class="source-text" data-lang-en="Source: An-Nasa'i & Tirmidhi" data-lang-hi="स्रोत: अन-नसाई और तिरमिज़ी">Source: An-Nasa'i & Tirmidhi</div>
                         <div class="reference">Hadith #1344, 3433</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('tasbih_repentance')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <div class="count">0</div>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 8. Recitation of the last 3 Surahs (Mu'awwidhatayn) - Ikhlas -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
                     قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾
                 </div>
-                <button class="translation-btn" onclick="showTranslation('ikhlas')">Translation</button>
+                <div class="meaning" data-lang-en="Say, &quot;He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.&quot;" data-lang-hi="कह दो कि वह अल्लाह एक है। अल्लाह बेनियाज़ है। न उसने किसी को जना और न वह जना गया। और न कोई उसका हमसर है।">Say, "He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent."</div>
                 <div class="source" onclick="showHadith('ikhlas')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Tirmidhi & Abu Dawud</div>
+                        <div class="source-text" data-lang-en="Source: Tirmidhi & Abu Dawud" data-lang-hi="स्रोत: तिरमिज़ी और अबू दाऊद">Source: Tirmidhi & Abu Dawud</div>
                         <div class="reference">Hadith #2903, 1523</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('ikhlas')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 8. Recitation of the last 3 Surahs (Mu'awwidhatayn) - Falaq -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
                     قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾
                 </div>
-                <button class="translation-btn" onclick="showTranslation('falaq')">Translation</button>
+                <div class="meaning" data-lang-en="Say, &quot;I seek refuge in the Lord of daybreak, From the evil of that which He created, And from the evil of darkness when it settles, And from the evil of the blowers in knots, And from the evil of an envier when he envies.&quot;" data-lang-hi="कह दो कि मैं सुबह के रब की पनाह मांगता हूँ। हर उस चीज़ के शर से जो उसने पैदा की। और अंधेरे के शर से जब वह छा जाए। और गांठों में फूंकने वालियों के शर से। और हसद करने वाले के शर से जब वह हसद करे।">Say, "I seek refuge in the Lord of daybreak, From the evil of that which He created, And from the evil of darkness when it settles, And from the evil of the blowers in knots, And from the evil of an envier when he envies."</div>
                 <div class="source" onclick="showHadith('falaq')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Tirmidhi & Abu Dawud</div>
+                        <div class="source-text" data-lang-en="Source: Tirmidhi & Abu Dawud" data-lang-hi="स्रोत: तिरमिज़ी और अबू दाऊद">Source: Tirmidhi & Abu Dawud</div>
                         <div class="reference">Hadith #2903, 1523</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('falaq')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 8. Recitation of the last 3 Surahs (Mu'awwidhatayn) - Nas -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
                     قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَٰهِ النَّاسِ ﴿٣﴾ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾
                 </div>
-                <button class="translation-btn" onclick="showTranslation('nas')">Translation</button>
+                <div class="meaning" data-lang-en="Say, &quot;I seek refuge in the Lord of mankind, The Sovereign of mankind, The God of mankind, From the evil of the whisperer who withdraws, Who whispers [evil] into the breasts of mankind, From among the jinn and mankind.&quot;" data-lang-hi="कह दो कि मैं लोगों के रब की पनाह मांगता हूँ। लोगों के बादशाह की। लोगों के माबूद की। उस वसवसा डालने वाले के शर से जो पीछे हट जाता है। जो लोगों के दिलों में वसवसा डालता है। जिन्न और इंसानों में से।">Say, "I seek refuge in the Lord of mankind, The Sovereign of mankind, The God of mankind, From the evil of the whisperer who withdraws, Who whispers [evil] into the breasts of mankind, From among the jinn and mankind."</div>
                 <div class="source" onclick="showHadith('nas')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Tirmidhi & Abu Dawud</div>
+                        <div class="source-text" data-lang-en="Source: Tirmidhi & Abu Dawud" data-lang-hi="स्रोत: तिरमिज़ी और अबू दाऊद">Source: Tirmidhi & Abu Dawud</div>
                         <div class="reference">Hadith #2903, 1523</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('nas')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 9. Tasbihat of Fatimah - Subhanallah -->
             <div class="azkar-card" data-max="33">
-                <div class="times">Recite 33 times</div>
+                <div class="times" data-lang-en="Recite 33 times" data-lang-hi="33 बार पढ़ें">Recite 33 times</div>
                 <div class="arabic">
                     سُبْحَانَ اللَّهِ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('subhanallah')">Translation</button>
+                <div class="meaning" data-lang-en="Glory is to Allah" data-lang-hi="अल्लाह पाक है">Glory is to Allah</div>
                 <div class="source" onclick="showHadith('subhanallah')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari & Sahih Muslim" data-lang-hi="स्रोत: सहीह अल-बुखारी और सहीह मुस्लिम">Source: Sahih al-Bukhari & Sahih Muslim</div>
                         <div class="reference">Hadith #843, 1349</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('subhanallah')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 9. Tasbihat of Fatimah - Alhamdulillah -->
             <div class="azkar-card" data-max="33">
-                <div class="times">Recite 33 times</div>
+                <div class="times" data-lang-en="Recite 33 times" data-lang-hi="33 बार पढ़ें">Recite 33 times</div>
                 <div class="arabic">
-                    الْحَمْدُ لِلَّهِ
+                    الْـحَمْدُ لِلَّهِ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('alhamdulillah')">Translation</button>
+                <div class="meaning" data-lang-en="Praise be to Allah" data-lang-hi="तारीफ़ अल्लाह के लिए है">Praise be to Allah</div>
                 <div class="source" onclick="showHadith('alhamdulillah')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari & Sahih Muslim" data-lang-hi="स्रोत: सहीह अल-बुखारी और सहीह मुस्लिम">Source: Sahih al-Bukhari & Sahih Muslim</div>
                         <div class="reference">Hadith #843, 1349</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('alhamdulillah')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 9. Tasbihat of Fatimah - Allahu Akbar -->
             <div class="azkar-card" data-max="33">
-                <div class="times">Recite 33 times</div>
+                <div class="times" data-lang-en="Recite 33 times" data-lang-hi="33 बार पढ़ें">Recite 33 times</div>
                 <div class="arabic">
                     اللَّهُ أَكْبَرُ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('allahu_akbar')">Translation</button>
+                <div class="meaning" data-lang-en="Allah is the Greatest" data-lang-hi="अल्लाह सबसे महान है">Allah is the Greatest</div>
                 <div class="source" onclick="showHadith('allahu_akbar')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari & Sahih Muslim" data-lang-hi="स्रोत: सहीह अल-बुखारी और सहीह मुस्लिम">Source: Sahih al-Bukhari & Sahih Muslim</div>
                         <div class="reference">Hadith #843, 1349</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('allahu_akbar')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 9. Tasbihat of Fatimah - Final declaration -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
-                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْـحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('tasbihat_final')">Translation</button>
+                <div class="meaning" data-lang-en="There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty and praise, and He is over everything omnipotent" data-lang-hi="अल्लाह के सिवा कोई इबादत के लायक नहीं, वह अकेला है, उसका कोई साझी नहीं। उसी का राज है, और उसी के लिए सारी प्रशंसा है, और वह हर चीज़ पर क़ादिर है।">There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty and praise, and He is over everything omnipotent</div>
                 <div class="source" onclick="showHadith('tasbihat_final')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari & Sahih Muslim" data-lang-hi="स्रोत: सहीह अल-बुखारी और सहीह मुस्लिम">Source: Sahih al-Bukhari & Sahih Muslim</div>
                         <div class="reference">Hadith #843, 1349</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('tasbihat_final')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 10. Special reward after Fajr or Maghrib -->
             <div class="azkar-card" data-max="10">
-                <div class="times fajr-maghrib">Recite 10 times after Maghrib or Fajr</div>
+                <div class="times fajr-maghrib" data-lang-en="Recite 10 times after Maghrib or Fajr" data-lang-hi="मग़रिब या फ़ज्र के बाद 10 बार पढ़ें">Recite 10 times after Maghrib or Fajr</div>
                 <div class="arabic">
-                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ
+                    لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ يُحْيِي وَيُمِيتُ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('special_fajr_maghrib')">Translation</button>
+                <div class="meaning" data-lang-en="There is none worthy of worship except Allah alone, He gives life and causes death" data-lang-hi="अल्लाह के सिवा कोई इबादत के लायक नहीं, वह अकेला है, वह जीवन देता है और मृत्यु देता है">There is none worthy of worship except Allah alone, He gives life and causes death</div>
                 <div class="source" onclick="showHadith('special_fajr_maghrib')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Tirmidhi & Musnad Ahmad</div>
+                        <div class="source-text" data-lang-en="Source: Tirmidhi & Musnad Ahmad" data-lang-hi="स्रोत: तिरमिज़ी और मुस्नद अहमद">Source: Tirmidhi & Musnad Ahmad</div>
                         <div class="reference">Hadith #3474, 18019</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('special_fajr_maghrib')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 11. Safety from the Hellfire -->
             <div class="azkar-card" data-max="7">
-                <div class="times">Recite 7 times after Fajr and Maghrib</div>
+                <div class="times" data-lang-en="Recite 7 times after Fajr and Maghrib" data-lang-hi="फ़ज्र और मग़रिब के बाद 7 बार पढ़ें">Recite 7 times after Fajr and Maghrib</div>
                 <div class="arabic">
                     اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('safety_hellfire')">Translation</button>
+                <div class="meaning" data-lang-en="O Allah, save me from the Fire" data-lang-hi="ऐ अल्लाह, मुझे आग से बचा">O Allah, save me from the Fire</div>
                 <div class="source" onclick="showHadith('safety_hellfire')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Abu Dawud</div>
+                        <div class="source-text" data-lang-en="Source: Abu Dawud" data-lang-hi="स्रोत: अबू दाऊद">Source: Abu Dawud</div>
                         <div class="reference">Hadith #5079</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('safety_hellfire')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 12. Dua for knowledge, provision, and righteous deeds after Fajr -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time after Fajr</div>
+                <div class="times" data-lang-en="Recite 1 time after Fajr" data-lang-hi="फ़ज्र के बाद 1 बार पढ़ें">Recite 1 time after Fajr</div>
                 <div class="arabic">
                     اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا
                 </div>
-                <button class="translation-btn" onclick="showTranslation('fajr_dua')">Translation</button>
+                <div class="meaning" data-lang-en="O Allah, I ask You for beneficial knowledge and goodly provision and accepted deeds" data-lang-hi="ऐ अल्लाह, मैं तुझसे मुफीद इल्म, पाकीज़ा रिज़्क, और कबूल किए गए आमाल मांगता हूँ">O Allah, I ask You for beneficial knowledge and goodly provision and accepted deeds</div>
                 <div class="source" onclick="showHadith('fajr_dua')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Ibn Majah</div>
+                        <div class="source-text" data-lang-en="Source: Ibn Majah" data-lang-hi="स्रोत: इब्न माजा">Source: Ibn Majah</div>
                         <div class="reference">Hadith #925</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('fajr_dua')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
 
-            <!-- 13. Dua about Divine provision and power -->
             <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
+                <div class="times" data-lang-en="Recite 1 time" data-lang-hi="1 बार पढ़ें">Recite 1 time</div>
                 <div class="arabic">
                     اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ
                 </div>
-                <button class="translation-btn" onclick="showTranslation('divine_provision')">Translation</button>
+                <div class="meaning" data-lang-en="O Allah, none can withhold what You give, and none can give what You withhold, and the wealth of the wealthy profits him nothing against You" data-lang-hi="ऐ अल्लाह, जिसे तू दे उसे कोई रोक नहीं सकता, और जिसे तू रोक दे उसे कोई दे नहीं सकता, और किसी मालदार को उसकी दौलत तेरे मुकाबले में फायदा नहीं पहुँचा सकती">O Allah, none can withhold what You give, and none can give what You withhold, and the wealth of the wealthy profits him nothing against You</div>
                 <div class="source" onclick="showHadith('divine_provision')">
                     <i class="fas fa-book"></i>
                     <div>
-                        <div class="source-text">Source: Sahih al-Bukhari & Sahih Muslim</div>
+                        <div class="source-text" data-lang-en="Source: Sahih al-Bukhari & Sahih Muslim" data-lang-hi="स्रोत: सहीह अल-बुखारी और सहीह मुस्लिम">Source: Sahih al-Bukhari & Sahih Muslim</div>
                         <div class="reference">Hadith #844, 1342</div>
                     </div>
                 </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
-                </div>
-            </div>
-
-            <!-- 14. Protection from cowardice, evil of old age, and torment -->
-            <div class="azkar-card" data-max="1">
-                <div class="times">Recite 1 time</div>
-                <div class="arabic">
-                    اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَىٰ أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ
-                </div>
-                <button class="translation-btn" onclick="showTranslation('protection_dua')">Translation</button>
-                <div class="source" onclick="showHadith('protection_dua')">
-                    <i class="fas fa-book"></i>
-                    <div>
-                        <div class="source-text">Source: Sahih al-Bukhari</div>
-                        <div class="reference">Hadith #2822</div>
+                <div class="counter-section">
+                    <button class="translation-btn" onclick="showTranslation('divine_provision')" data-lang-en="Transliteration" data-lang-hi="लिप्यंतरण">Transliteration</button>
+                    <div class="counter-buttons">
+                        <button class="counter-btn" onclick="decreaseCount(this)">-</button>
+                        <button class="count">0</button>
+                        <button class="counter-btn" onclick="increaseCount(this)">+</button>
                     </div>
-                </div>
-                <div class="counter">
-                    <button class="counter-btn" onclick="decreaseCount(this)">-</button>
-                    <div class="count">0</div>
-                    <button class="counter-btn" onclick="increaseCount(this)">+</button>
-                    <button class="reset-btn" onclick="resetCount(this)">Reset</button>
+                    <button class="reset-btn" onclick="resetCount(this)" data-lang-en="Reset" data-lang-hi="रीसेट करें">Reset</button>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>Made with <i class="fas fa-heart" style="color: #ff6b6b;"></i> for the sake of Allah | Authentic Azkars after Fard Salah</p>
-            <p>All supplications are from verified Hadith sources | May Allah accept our prayers and deeds</p>
-            <p>(Faisal)</p>
+            <p data-lang-en="Made with" data-lang-hi="बनाया गया">Made with</p> <i class="fas fa-heart" style="color: #ff6b6b;"></i> <span data-lang-en="for the sake of Allah | Authentic Azkars after Fard Salah" data-lang-hi="अल्लाह की खातिर | फ़र्ज़ नमाज़ के बाद प्रामाणिक अज़कार">for the sake of Allah | Authentic Azkars after Fard Salah</span></p>
+            <p data-lang-en="All supplications are from verified Hadith sources | May Allah accept our prayers and deeds" data-lang-hi="सभी दुआएं सत्यापित हदीस स्रोतों से हैं | अल्लाह हमारी दुआओं और आमाल को कबूल फरमाए">All supplications are from verified Hadith sources | May Allah accept our prayers and deeds</p>
+            <p data-lang-en="Copyright Faisal" data-lang-hi="कॉपीराइट फैसल">Copyright Faisal</p>
         </footer>
     </div>
 
-    <!-- Hadith Popup -->
     <div class="hadith-popup" id="hadithPopup">
         <div class="hadith-content">
             <span class="close-popup" onclick="closeHadith()">&times;</span>
@@ -816,7 +878,6 @@
         </div>
     </div>
 
-    <!-- Translation Popup -->
     <div class="hadith-popup" id="translationPopup">
         <div class="hadith-content">
             <span class="close-popup" onclick="closeTranslation()">&times;</span>
@@ -828,115 +889,296 @@
         const hadithData = {
             takbir: {
                 arabic: "اللّٰهُ أَكْبَرُ",
-                translation: "Allah is the Greatest",
-                reference: "Syedna Abdullah bin Abbas narrates: I used to recognize the completion of the obligatory prayer of the Messenger of Allah by the loud sound of Takbir. (1 time, loudly) [Hadith #1316: Sahih al-Bukhari 842, Sahih Muslim]"
+                transliteration: "Allāhu Akbar",
+                translation: {
+                    en: "Allah is the Greatest",
+                    hi: "अल्लाह सबसे महान है"
+                },
+                reference: {
+                    en: "Ibn 'Abbas said: \"I used to recognize that the Prayer of the Prophet ﷺ had ended by the Takbir (saying Allahu Akbar) that we heard.\" (1 time, loudly) [Hadith #1316: Sahih al-Bukhari 842, Sahih Muslim 1316]",
+                    hi: "इब्न अब्बास ने फरमाया: \"मैं नबी ﷺ की नमाज़ के खत्म होने को तकबीर (अल्लाहु अकबर कहने) से पहचानता था जो हम सुनते थे।\" (1 बार, जोर से) [हदीस #1316: सहीह अल-बुखारी 842, सहीह मुस्लिम 1316]"
+                }
             },
             istighfar: {
                 arabic: "أَسْتَغْفِرُ اللَّهَ",
-                translation: "I seek forgiveness from Allah",
-                reference: "Syedna Thawban narrates: When the Messenger of Allah had finished his prayer, he would recite these words: (3 times) I ask Allah for forgiveness: immediately after that, 1 time [Hadith #1334: Sahih Muslim]"
+                transliteration: "Astaghfirullāh",
+                translation: {
+                    en: "I seek forgiveness from Allah",
+                    hi: "मैं अल्लाह से माफ़ी माँगता हूँ"
+                },
+                reference: {
+                    en: "Thawban reported that when the Prophet ﷺ finished prayer, he used to ask for forgiveness three times and then say this supplication. (3 times) [Hadith #1334: Sahih Muslim 1334]",
+                    hi: "सौबान ने रिवायत की कि जब नबी ﷺ नमाज़ खत्म करते थे, तो वह तीन बार इस्तगफार करते थे और फिर यह दुआ पढ़ते थे। (3 बार) [हदीस #1334: सहीह मुस्लिम 1334]"
+                }
             },
             salutation: {
                 arabic: "اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
-                translation: "O Allah, You are As-Salam (the One Who is free from all defects and deficiencies) and from You is all peace, blessed are You, Possessor of majesty and honor",
-                reference: "Syedna Thawban narrates: When the Messenger of Allah had finished his prayer, he would recite these words: (3 times) I ask Allah for forgiveness: immediately after that, 1 time [Hadith #1334: Sahih Muslim]"
+                transliteration: "Allāhumma antas-salāmu, wa minkas-salām, tabārakta yā dhā al-jalāli wal-ikrām",
+                translation: {
+                    en: "O Allah, You are As-Salam (the One Who is free from all defects and deficiencies) and from You is all peace, blessed are You, Possessor of majesty and honor",
+                    hi: "ऐ अल्लाह, तू अस्-सलाम है (वह जो सभी दोषों और कमियों से मुक्त है) और तुझसे ही सारी शांति है, तू बरकत वाला है, ऐ महिमा और सम्मान के मालिक"
+                },
+                reference: {
+                    en: "Thawban reported that when the Prophet ﷺ finished prayer, he used to ask for forgiveness three times and then say this supplication. (1 time) [Hadith #1334: Sahih Muslim 1334]",
+                    hi: "सौबान ने रिवायत की कि जब नबी ﷺ नमाज़ खत्म करते थे, तो वह तीन बार इस्तगफार करते थे और फिर यह दुआ पढ़ते थे। (1 बार) [हदीस #1334: सहीह मुस्लिम 1334]"
+                }
             },
             ayat_al_kursi: {
-                arabic: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
-                translation: "Allah! There is none worthy of worship except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Supreme.",
-                reference: "Syedna Abu Umamah narrates: The Messenger of Allah said: Whoever recites Ayat al Kursi (Surah Al-Baqarah: Verse 255) after every prayer, he will for sure enter paradise immediately after his death. [Hadith #9928: An-Nasa'i Al-Kubra]"
+                arabic: "اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْـحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ",
+                transliteration: "Allāhu lā ilāha illā huwal-ḥayyul-qayyūm, lā ta'khudhuhu sinatun wa lā nawm, lahū mā fis-samāwāti wa mā fil-ard, man dhā alladhī yashfa'u 'indahu illā bi'idhnihi, ya'lamu mā bayna aydīhim wa mā khalfahum, wa lā yuḥīṭūna bi-shay'in min 'ilmihi illā bimā shā'a, wasi'a kursiyyuhus-samāwāti wal-arda, wa lā ya'ūduhu ḥifẓuhumā, wa Huwal-'Aliyyul-'Aẓīm",
+                translation: {
+                    en: "Allah! There is none worthy of worship except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Supreme.",
+                    hi: "अल्लाह! उसके सिवा कोई इबादत के लायक नहीं, वह ज़िंदा है, सब कुछ संभालने वाला है। न उसे ऊंघ आती है और न नींद। जो कुछ आसमानों में है और जो कुछ ज़मीन में है, सब उसी का है। कौन है जो उसकी इजाज़त के बिना उसके पास सिफ़ारिश कर सके? वह जानता है जो उनके सामने है और जो उनके पीछे है, और वे उसके ज्ञान का कुछ भी नहीं जान सकते सिवाय उसके जो वह चाहे। उसकी कुर्सी आसमानों और ज़मीन पर फैली हुई है, और उनकी हिफाज़त उसे थकाती नहीं है। और वह सबसे ऊँचा, सबसे महान है।"
+                },
+                reference: {
+                    en: "Whoever recites Ayat al Kursi after every obligatory prayer, nothing prevents him from entering Paradise except death. (1 time) [Hadith #9928: An-Nasa'i Al-Kubra 9928]",
+                    hi: "जो कोई भी हर फर्ज़ नमाज़ के बाद आयतुल कुर्सी पढ़ेगा, मौत के सिवा कोई चीज़ उसे जन्नत में जाने से नहीं रोक सकती। (1 बार) [हदीस #9928: अन-नसाई अल-कुबरा 9928]"
+                }
             },
             muadh_dhikr: {
                 arabic: "رَبِّ أَعِنِّي عَلَىٰ ذِكْرِكَ، وَشُكْرِكَ، وَحُسْنِ عِبَادَتِكَ",
-                translation: "My Lord, help me to remember You, to thank You, and to worship You in the best manner",
-                reference: "Syedna Muadh bin Jabal narrates: the Messenger of Allah advised to me: O Muadh! Never leave saying these words after every prayer. (1 time) [Hadith #13033: An-Nasa'i, #1522: Abu Dawud]"
+                transliteration: "Rabbī a'innī 'alā dhikrika, wa shukrika, wa ḥusni 'ibādatik",
+                translation: {
+                    en: "My Lord, help me to remember You, to thank You, and to worship You in the best manner",
+                    hi: "ऐ मेरे रब, मुझे तेरा ज़िक्र करने में, तेरा शुक्र अदा करने में, और तेरी अच्छी इबादत करने में मदद कर"
+                },
+                reference: {
+                    en: "The Prophet ﷺ said to Mu'adh: \"O Mu'adh, by Allah I love you, so do not forget to say this after every prayer.\" (1 time) [Hadith #1522: Abu Dawud 1522, #1303: An-Nasa'i 1303]",
+                    hi: "नबी ﷺ ने मुआज़ से फ़रमाया: \"ऐ मुआज़, अल्लाह की क़सम मैं तुमसे मुहब्बत करता हूँ, तो हर नमाज़ के बाद यह कहना मत भूलना।\" (1 बार) [हदीस #1522: अबू दाऊद 1522, #1303: अन-नसाई 1303]"
+                }
             },
             quran_dua: {
                 arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً، وَفِي الْآخِرَةِ حَسَنَةً، وَقِنَا عَذَابَ النَّارِ",
-                translation: "Our Lord, give us good in this world and good in the Hereafter, and save us from the punishment of the Fire",
-                reference: "Syedna Anas narrates: the Messenger of Allah would frequently pray. (1 time) [Hadith #6840: Sahih Muslim, #6389: Sahih al-Bukhari]"
+                transliteration: "Rabbana ātinā fid-dunyā ḥasanatan, wa fil-ākhirati ḥasanatan, wa qinā 'adhāban-nār",
+                translation: {
+                    en: "Our Lord, give us good in this world and good in the Hereafter, and save us from the punishment of the Fire",
+                    hi: "हमारे रब, हमें इस दुनिया में भलाई दे और आखिरत में भलाई दे, और हमें आग की सज़ा से बचा"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #6389: Sahih al-Bukhari 6389, #6840: Sahih Muslim 6840]",
+                    hi: "(1 बार) [हदीस #6389: सहीह अल-बुखारी 6389, #6840: सहीह मुस्लिम 6840]"
+                }
             },
             la_ilaha_3: {
-                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
-                translation: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty, and to Him belongs praise, and He is able to do all things",
-                reference: "Syedna Mugheerah bin Shuba narrates: When the Messenger of Allah would say Salam of the prayer, he would recite these words three times. [Hadith #6473: Sahih al-Bukhari]"
+                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْـحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+                transliteration: "Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku, wa lahul-ḥamdu, wa huwa 'alā kulli shay'in qadīr",
+                translation: {
+                    en: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty and praise, and He is over everything omnipotent",
+                    hi: "अल्लाह के सिवा कोई इबादत के लायक नहीं, वह अकेला है, उसका कोई साझी नहीं। उसी का राज है, और उसी के लिए सारी प्रशंसा है, और वह हर चीज़ पर क़ादिर है।"
+                },
+                reference: {
+                    en: "(3 times) [Hadith #6473: Sahih al-Bukhari 6473]",
+                    hi: "(3 बार) [हदीस #6473: सहीह अल-बुखारी 6473]"
+                }
             },
             tasbih_repentance: {
                 arabic: "سُبْحَانَكَ اللَّهُمَّ وَبِحَمْدِكَ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَسْتَغْفِرُكَ، وَأَتُوبُ إِلَيْكَ",
-                translation: "Glory is to You, O Allah, and praise, I bear witness that there is none worthy of worship except You, I seek Your forgiveness and I repent to You",
-                reference: "Syedna Aishah narrates: When the Messenger of Allah would participate in a gathering or perform the prayer, he would recite these words at the end: (1 time) [Hadith #3433: Tirmidhi, #1344: An-Nasa'i]"
+                transliteration: "Subḥānaka Allāhumma wa biḥamdik, ash-hadu an lā ilāha illā ant, astaghfiruka, wa atūbu ilayk",
+                translation: {
+                    en: "Glory is to You, O Allah, and praise. I bear witness that there is none worthy of worship except You. I seek Your forgiveness and I repent to You",
+                    hi: "तू पाक है, ऐ अल्लाह, और तेरी ही प्रशंसा है। मैं गवाही देता हूँ कि तेरे सिवा कोई इबादत के लायक नहीं। मैं तुझसे माफ़ी माँगता हूँ और तेरी तरफ़ रुजू करता हूँ।"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #1344: An-Nasa'i 1344, #3433: Tirmidhi 3433]",
+                    hi: "(1 बार) [हदीस #1344: अन-नसाई 1344, #3433: तिरमिज़ी 3433]"
+                }
             },
             ikhlas: {
                 arabic: "قُلْ هُوَ اللَّهُ أَحَدٌ ﴿١﴾ اللَّهُ الصَّمَدُ ﴿٢﴾ لَمْ يَلِدْ وَلَمْ يُولَدْ ﴿٣﴾ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ ﴿٤﴾",
-                translation: "Say, 'He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, and there is none equal to Him.'",
-                reference: "Syedna Uqbah bin Amir narrates: the Messenger of Allah ordered me to recite Muawwidhat (i.e., the 3 Surahs giving the refuge of Allah against Shaitan, Jinn and magic etc.) at the end of every prayer. (The three Surahs 1 time) [Hadith #1523: Abu Dawud, #2903: Tirmidhi]"
+                transliteration: "Qul huwallāhu aḥad, allahus-samad, lam yalid wa lam yūlad, wa lam yakun lahu kufuwan aḥad",
+                translation: {
+                    en: "Say, \"He is Allah, [who is] One, Allah, the Eternal Refuge. He neither begets nor is born, Nor is there to Him any equivalent.\"",
+                    hi: "कह दो कि वह अल्लाह एक है। अल्लाह बेनियाज़ है। न उसने किसी को जना और न वह जना गया। और न कोई उसका हमसर है।"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #2903: Tirmidhi 2903, #1523: Abu Dawud 1523]",
+                    hi: "(1 बार) [हदीस #2903: तिरमिज़ी 2903, #1523: अबू दाऊद 1523]"
+                }
             },
             falaq: {
                 arabic: "قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾",
-                translation: "Say, 'I seek refuge in the Lord of daybreak, from the evil of what He created, and from the evil of darkness when it settles, and from the evil of the blowers in knots, and from the evil of an envier when he envies.'",
-                reference: "Syedna Uqbah bin Amir narrates: the Messenger of Allah ordered me to recite Muawwidhat (i.e., the 3 Surahs giving the refuge of Allah against Shaitan, Jinn and magic etc.) at the end of every prayer. (The three Surahs 1 time) [Hadith #1523: Abu Dawud, #2903: Tirmidhi]"
+                transliteration: "Qul a'udhu birabbil-falaq, min sharri mā khalaq, wa min sharri ghasiqin idhā waqab, wa min sharri naffāthāti fil-'uqad, wa min sharri hasidin idhā hasad",
+                translation: {
+                    en: "Say, \"I seek refuge in the Lord of daybreak, From the evil of that which He created, And from the evil of darkness when it settles, And from the evil of the blowers in knots, And from the evil of an envier when he envies.\"",
+                    hi: "कह दो कि मैं सुबह के रब की पनाह मांगता हूँ। हर उस चीज़ के शर से जो उसने पैदा की। और अंधेरे के शर से जब वह छा जाए। और गांठों में फूंकने वालियों के शर से। और हसद करने वाले के शर से जब वह हसद करे।"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #2903: Tirmidhi 2903, #1523: Abu Dawud 1523]",
+                    hi: "(1 बार) [हदीस #2903: तिरमिज़ी 2903, #1523: अबू दाऊद 1523]"
+                }
             },
             nas: {
                 arabic: "قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَٰهِ النَّاسِ ﴿٣﴾ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾",
-                translation: "Say, 'I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the whisperer who withdraws, who whispers in the breasts of mankind, from among the jinn and mankind.'",
-                reference: "Syedna Uqbah bin Amir narrates: the Messenger of Allah ordered me to recite Muawwidhat (i.e., the 3 Surahs giving the refuge of Allah against Shaitan, Jinn and magic etc.) at the end of every prayer. (The three Surahs 1 time) [Hadith #1523: Abu Dawud, #2903: Tirmidhi]"
+                transliteration: "Qul a'udhu birabbin-nās, malikin-nās, ilāhin-nās, min sharri waswasil-khannās, alladhī yuwaswisu fī ṣudūrin-nās, minal-jinnati wan-nās",
+                translation: {
+                    en: "Say, \"I seek refuge in the Lord of mankind, The Sovereign of mankind, The God of mankind, From the evil of the whisperer who withdraws, Who whispers [evil] into the breasts of mankind, From among the jinn and mankind.\"",
+                    hi: "कह दो कि मैं लोगों के रब की पनाह मांगता हूँ। लोगों के बादशाह की। लोगों के माबूद की। उस वसवसा डालने वाले के शर से जो पीछे हट जाता है। जो लोगों के दिलों में वसवसा डालता है। जिन्न और इंसानों में से।"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #2903: Tirmidhi 2903, #1523: Abu Dawud 1523]",
+                    hi: "(1 बार) [हदीस #2903: तिरमिज़ी 2903, #1523: अबू दाऊद 1523]"
+                }
             },
             subhanallah: {
                 arabic: "سُبْحَانَ اللَّهِ",
-                translation: "Glory is to Allah",
-                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+                transliteration: "Subḥānallāh",
+                translation: {
+                    en: "Glory is to Allah",
+                    hi: "अल्लाह पाक है"
+                },
+                reference: {
+                    en: "(33 times) [Hadith #843: Sahih al-Bukhari 843, #1349: Sahih Muslim 1349]",
+                    hi: "(33 बार) [हदीस #843: सहीह अल-बुखारी 843, #1349: सहीह मुस्लिम 1349]"
+                }
             },
             alhamdulillah: {
-                arabic: "الْحَمْدُ لِلَّهِ",
-                translation: "Praise be to Allah",
-                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+                arabic: "الْـحَمْدُ لِلَّهِ",
+                transliteration: "Al-ḥamdulillāh",
+                translation: {
+                    en: "Praise be to Allah",
+                    hi: "तारीफ़ अल्लाह के लिए है"
+                },
+                reference: {
+                    en: "(33 times) [Hadith #843: Sahih al-Bukhari 843, #1349: Sahih Muslim 1349]",
+                    hi: "(33 बार) [हदीस #843: सहीह अल-बुखारी 843, #1349: सहीह मुस्लिम 1349]"
+                }
             },
             allahu_akbar: {
                 arabic: "اللَّهُ أَكْبَرُ",
-                translation: "Allah is the Greatest",
-                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+                transliteration: "Allāhu Akbar",
+                translation: {
+                    en: "Allah is the Greatest",
+                    hi: "अल्लाह सबसे महान है"
+                },
+                reference: {
+                    en: "(33 times) [Hadith #843: Sahih al-Bukhari 843, #1349: Sahih Muslim 1349]",
+                    hi: "(33 बार) [हदीस #843: सहीह अल-बुखारी 843, #1349: सहीह मुस्लिम 1349]"
+                }
             },
             tasbihat_final: {
-                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
-                translation: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty, and to Him belongs praise, and He is able to do all things",
-                reference: "Syedna Abu Hurairah narrates: the Messenger of Allah said that the one who says these words after every prayer never becomes disappointed, and all of his sins are forgiven, even if his sins are like the foam of the sea. (All the three, 33 times) [Hadith #1352: Sahih al-Bukhari, #1349: Sahih Muslim, #843: Sahih al-Bukhari]"
+                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْـحَمْدُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+                transliteration: "Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku, wa lahul-ḥamdu, wa huwa 'alā kulli shay'in qadīr",
+                translation: {
+                    en: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty and praise, and He is over everything omnipotent",
+                    hi: "अल्लाह के सिवा कोई इबादत के लायक नहीं, वह अकेला है, उसका कोई साझी नहीं। उसी का राज है, और उसी के लिए सारी प्रशंसा है, और वह हर चीज़ पर क़ादिर है।"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #843: Sahih al-Bukhari 843, #1349: Sahih Muslim 1349]",
+                    hi: "(1 बार) [हदीस #843: सहीह अल-बुखारी 843, #1349: सहीह मुस्लिम 1349]"
+                }
             },
             special_fajr_maghrib: {
-                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ، وَلَهُ الْحَمْدُ، يُحْيِي وَيُمِيتُ، وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
-                translation: "There is none worthy of worship except Allah alone, with no partner or associate. To Him belongs sovereignty, and to Him belongs praise. He gives life and causes death, and He is able to do all things",
-                reference: "Syedna Abdur Rahman bin Ghanam narrates: the Messenger of Allah said: Whoever says these words at the end of Maghrib prayer and Fajr prayer while his feet are still folded, before speaking, he gets the reward of freeing 10 slaves and he shall be in protection from every dangerous thing and Shaitan all the day and night (10 times) [Hadith #3474: Tirmidhi, #18019: Musnad Ahmad]"
+                arabic: "لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ يُحْيِي وَيُمِيتُ",
+                transliteration: "Lā ilāha illallāhu waḥdahu yuḥyī wa yumīt",
+                translation: {
+                    en: "There is none worthy of worship except Allah alone, He gives life and causes death",
+                    hi: "अल्लाह के सिवा कोई इबादत के लायक नहीं, वह अकेला है, वह जीवन देता है और मृत्यु देता है"
+                },
+                reference: {
+                    en: "The Prophet ﷺ said: \"Whoever says this 10 times after Maghrib or Fajr, the reward is as if he freed 10 slaves.\" (10 times) [Hadith #3474: Tirmidhi 3474, #18019: Musnad Ahmad 18019]",
+                    hi: "नबी ﷺ ने फरमाया: \"जो कोई भी मग़रिब या फ़ज्र के बाद इसे 10 बार कहेगा, उसे 10 गुलाम आज़ाद करने का सवाब मिलेगा।\" (10 बार) [हदीस #3474: तिरमिज़ी 3474, #18019: मुस्नद अहमद 18019]"
+                }
             },
             safety_hellfire: {
                 arabic: "اللَّهُمَّ أَجِرْنِي مِنَ النَّارِ",
-                translation: "O Allah, save me from the Fire",
-                reference: "Syedna Abu Harith narrates: the Messenger of Allah said: Whoever says these words at the end of Maghrib prayer before speaking and if he dies that night, he will be free from the fire of Hell. If he recites these words at the end of Fajr prayer and dies that day, he will be free form the Hell. (7 times) [Hadith #5079: Abu Dawud]"
+                transliteration: "Allāhumma ajirnī minan-nār",
+                translation: {
+                    en: "O Allah, save me from the Fire",
+                    hi: "ऐ अल्लाह, मुझे आग से बचा"
+                },
+                reference: {
+                    en: "(7 times) [Hadith #5079: Abu Dawud 5079]",
+                    hi: "(7 बार) [हदीस #5079: अबू दाऊद 5079]"
+                }
             },
             fajr_dua: {
                 arabic: "اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا",
-                translation: "O Allah, I ask You for beneficial knowledge and goodly provision and acceptable deeds",
-                reference: "Syedna Umm Salamah narrates: When the Messenger of Allah would say the Salam of the Fajr prayer, he would pray with these words (1 time) [Hadith #925: Ibn Majah]"
+                transliteration: "Allāhumma innī as'aluka 'ilman nāfi'an, wa rizqan ṭayyiban, wa 'amalan mutaqabbalan",
+                translation: {
+                    en: "O Allah, I ask You for beneficial knowledge and goodly provision and accepted deeds",
+                    hi: "ऐ अल्लाह, मैं तुझसे मुफीद इल्म, पाकीज़ा रिज़्क, और कबूल किए गए आमाल मांगता हूँ"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #925: Ibn Majah 925]",
+                    hi: "(1 बार) [हदीस #925: इब्न माजा 925]"
+                }
             },
             divine_provision: {
                 arabic: "اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ، وَلَا مُعْطِيَ لِمَا مَنَعْتَ، وَلَا يَنْفَعُ ذَا الْجَدِّ مِنْكَ الْجَدُّ",
-                translation: "O Allah, none can withhold what You give, and none can give what You withhold, and the good fortune of any fortunate person is of no avail against You",
-                reference: "Syedna Mugheerah bin Shuba narrates: When the Messenger of Allah would say the Salam of the prayer, he would recite these words. (1 time) [Hadith #1342: Sahih al-Bukhari, #1844: Sahih Muslim]"
-            },
-            protection_dua: {
-                arabic: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْجُبْنِ، وَأَعُوذُ بِكَ أَنْ أُرَدَّ إِلَىٰ أَرْذَلِ الْعُمُرِ، وَأَعُوذُ بِكَ مِنْ فِتْنَةِ الدُّنْيَا، وَأَعُوذُ بِكَ مِنْ عَذَابِ الْقَبْرِ",
-                translation: "O Allah, I seek refuge with You from cowardice, and I seek refuge with You from miserliness, and I seek refuge with You from being brought back to senile old age, and I seek refuge with You from the Fitnah (trials or afflictions) of the world, and I seek refuge with You from the punishments in the grave",
-                reference: "Syedna Saad bin Abi Waqqas narrates: the Messenger of Allah used to seek refuge with Allah through these words at the end of every prayer. (1 time) [Hadith #5718: Sahih al-Bukhari]"
+                transliteration: "Allāhumma lā māni'a limā a'tayta, wa lā mu'tiya limā mana'ta, wa lā yanfa'u dhā al-jaddi minkal-jadd",
+                translation: {
+                    en: "O Allah, none can withhold what You give, and none can give what You withhold, and the wealth of the wealthy profits him nothing against You",
+                    hi: "ऐ अल्लाह, जिसे तू दे उसे कोई रोक नहीं सकता, और जिसे तू रोक दे उसे कोई दे नहीं सकता, और किसी मालदार को उसकी दौलत तेरे मुकाबले में फायदा नहीं पहुँचा सकती"
+                },
+                reference: {
+                    en: "(1 time) [Hadith #844: Sahih al-Bukhari 844, #1342: Sahih Muslim 1342]",
+                    hi: "(1 बार) [हदीस #844: सहीह अल-बुखारी 844, #1342: सहीह मुस्लिम 1342]"
+                }
             }
         };
+
+        const staticText = {
+            headerTitle: {
+                en: "Azkars After Fard Salah",
+                hi: "फ़र्ज़ नमाज़ के बाद के अज़कार"
+            },
+            headerSubtitle: {
+                en: "Authentic supplications from the Quran and Sunnah to be recited after obligatory prayers",
+                hi: "कुरान और सुन्नत से प्रामाणिक दुआएं जो फ़र्ज़ नमाज़ के बाद पढ़ी जाती हैं"
+            },
+            introHeading: {
+                en: "Authentic Azkars After Prayer",
+                hi: "नमाज़ के बाद प्रामाणिक अज़कार"
+            },
+            introText: {
+                en: "These are authentic supplications and remembrances (Azkars) that the Prophet Muhammad (ﷺ) taught and practiced after completing the obligatory prayers. They are compiled from reliable Hadith sources and are recommended for every Muslim to recite after Fard Salah.",
+                hi: "ये प्रामाणिक दुआएं और अज़कार हैं जो पैगंबर मुहम्मद (ﷺ) ने फ़र्ज़ नमाज़ें पूरी करने के बाद सिखाए और अमल किए। इन्हें विश्वसनीय हदीस स्रोतों से संकलित किया गया है और हर मुसलमान के लिए फ़र्ज़ नमाज़ के बाद पढ़ने की सिफारिश की जाती है।"
+            },
+            selectLanguage: {
+                en: "Select Language:",
+                hi: "भाषा चुनें:"
+            },
+            footerMadeWith: {
+                en: "Made with",
+                hi: "बनाया गया"
+            },
+            footerPurpose: {
+                en: "for the sake of Allah | Authentic Azkars after Fard Salah",
+                hi: "अल्लाह की खातिर | फ़र्ज़ नमाज़ के बाद प्रामाणिक अज़कार"
+            },
+            footerDisclaimer: {
+                en: "All supplications are from verified Hadith sources | May Allah accept our prayers and deeds",
+                hi: "सभी दुआएं सत्यापित हदीस स्रोतों से हैं | अल्लाह हमारी दुआओं और आमाल को कबूल फरमाए"
+            },
+            footerCopyright: {
+                en: "Copyright Faisal",
+                hi: "कॉपीराइट फैसल"
+            },
+            sourceText: {
+                en: "Source:",
+                hi: "स्रोत:"
+            },
+            hadithPopupTitle: {
+                en: "Authentic Hadith",
+                hi: "प्रामाणिक हदीस"
+            },
+            translationPopupTitle: {
+                en: "Transliteration & Translation",
+                hi: "लिप्यंतरण और अनुवाद"
+            }
+        };
+
 
         function showHadith(key) {
             const popup = document.getElementById('hadithPopup');
             const details = document.getElementById('hadithDetails');
+            const currentLang = document.getElementById('languageSelect').value;
             
             if (hadithData[key]) {
                 details.innerHTML = `
-                    <h2 style="color: #1a2a6c; margin-bottom: 20px;">Authentic Hadith</h2>
+                    <h2 style="color: #1a2a6c; margin-bottom: 20px;" id="hadithPopupTitle">${staticText.hadithPopupTitle[currentLang]}</h2>
                     <div class="hadith-arabic">${hadithData[key].arabic}</div>
-                    <div class="hadith-translation">${hadithData[key].reference}</div>
+                    <div class="hadith-translation">${hadithData[key].reference[currentLang]}</div>
                 `;
                 popup.style.display = 'flex';
             }
@@ -945,12 +1187,14 @@
         function showTranslation(key) {
             const popup = document.getElementById('translationPopup');
             const details = document.getElementById('translationDetails');
+            const currentLang = document.getElementById('languageSelect').value;
             
             if (hadithData[key]) {
                 details.innerHTML = `
-                    <h2 style="color: #1a2a6c; margin-bottom: 20px;">Translation</h2>
+                    <h2 style="color: #1a2a6c; margin-bottom: 20px;" id="translationPopupTitle">${staticText.translationPopupTitle[currentLang]}</h2>
                     <div class="hadith-arabic">${hadithData[key].arabic}</div>
-                    <div class="hadith-translation">${hadithData[key].translation}</div>
+                    <div class="hadith-transliteration">${hadithData[key].transliteration}</div>
+                    <div class="hadith-translation">${hadithData[key].translation[currentLang]}</div>
                 `;
                 popup.style.display = 'flex';
             }
@@ -976,8 +1220,7 @@
                 
                 if (count === maxCount) {
                     countElement.classList.add('completed');
-                    const buttons = card.querySelectorAll('.counter-btn');
-                    buttons[1].disabled = true;
+                    // Removed button disable as user can still decrease and reset
                 }
             }
         }
@@ -991,9 +1234,6 @@
                 count--;
                 countElement.textContent = count;
                 countElement.classList.remove('completed');
-                
-                const buttons = card.querySelectorAll('.counter-btn');
-                buttons[1].disabled = false;
             }
         }
 
@@ -1002,9 +1242,6 @@
             const countElement = card.querySelector('.count');
             countElement.textContent = '0';
             countElement.classList.remove('completed');
-            
-            const buttons = card.querySelectorAll('.counter-btn');
-            buttons[1].disabled = false;
         }
 
         // Close popup when clicking outside
@@ -1020,7 +1257,70 @@
                 translationPopup.style.display = 'none';
             }
         }
+
+        // Language switching logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageSelect = document.getElementById('languageSelect');
+            languageSelect.addEventListener('change', updateContentLanguage);
+            updateContentLanguage(); // Set initial language
+        });
+
+        function updateContentLanguage() {
+            const selectedLang = document.getElementById('languageSelect').value;
+
+            // Update header and intro text
+            document.getElementById('headerTitle').textContent = staticText.headerTitle[selectedLang];
+            document.getElementById('headerSubtitle').textContent = staticText.headerSubtitle[selectedLang];
+            document.getElementById('introHeading').textContent = staticText.introHeading[selectedLang];
+            document.getElementById('introText').textContent = staticText.introText[selectedLang];
+            document.querySelector('.lang-select-container label').textContent = staticText.selectLanguage[selectedLang];
+
+
+            // Update azkar card texts
+            document.querySelectorAll('.azkar-card').forEach(card => {
+                const timesElement = card.querySelector('.times');
+                if (timesElement && timesElement.dataset['lang' + selectedLang]) {
+                    timesElement.textContent = timesElement.dataset['lang' + selectedLang];
+                }
+
+                const meaningElement = card.querySelector('.meaning');
+                if (meaningElement && meaningElement.dataset['lang' + selectedLang]) {
+                    meaningElement.textContent = meaningElement.dataset['lang' + selectedLang];
+                }
+
+                const sourceTextElement = card.querySelector('.source-text');
+                if (sourceTextElement && sourceTextElement.dataset['lang' + selectedLang]) {
+                    sourceTextElement.textContent = sourceTextElement.dataset['lang' + selectedLang];
+                }
+
+                const translationBtn = card.querySelector('.translation-btn');
+                if (translationBtn && translationBtn.dataset['lang' + selectedLang]) {
+                    translationBtn.textContent = translationBtn.dataset['lang' + selectedLang];
+                }
+
+                const resetBtn = card.querySelector('.reset-btn');
+                if (resetBtn && resetBtn.dataset['lang' + selectedLang]) {
+                    resetBtn.textContent = resetBtn.dataset['lang' + selectedLang];
+                }
+            });
+
+            // Update footer text
+            document.querySelector('footer p:nth-child(1)').childNodes[0].nodeValue = staticText.footerMadeWith[selectedLang];
+            document.querySelector('footer p:nth-child(1) span').textContent = staticText.footerPurpose[selectedLang];
+            document.querySelector('footer p:nth-child(2)').textContent = staticText.footerDisclaimer[selectedLang];
+            document.querySelector('footer p:nth-child(3)').textContent = staticText.footerCopyright[selectedLang];
+
+            // Update Hadith and Translation popup titles if they are open
+            const hadithPopupTitle = document.getElementById('hadithPopupTitle');
+            if (hadithPopupTitle) {
+                hadithPopupTitle.textContent = staticText.hadithPopupTitle[selectedLang];
+            }
+            const translationPopupTitle = document.getElementById('translationPopupTitle');
+            if (translationPopupTitle) {
+                translationPopupTitle.textContent = staticText.translationPopupTitle[selectedLang];
+            }
+        }
+
     </script>
 </body>
 </html>
-```
